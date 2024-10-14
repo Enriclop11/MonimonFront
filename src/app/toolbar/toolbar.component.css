@@ -1,0 +1,22 @@
+.spacer {
+  flex: 1 1 auto;
+}
+
+.icon {
+  width: 30px;
+  height: 30px;
+}
+
+.toolbar {
+  display: flex;
+  padding: 10px;
+  background-color: var(--purple);
+  font-family: 'Bebas Neue', sans-serif;
+  color: #fff;
+  height: 5em;
+}
+
+a {
+  color: #fff;
+  text-decoration: none;
+}

@@ -1,0 +1,50 @@
+<h1 class="title">LEADERBOARD MONITAS</h1>
+
+<!-- Do a selector for the leaderboard like "PHOTOCARDS//SCORE" -->
+<div class="leaderboard-container">
+  <div class="selector">
+    <span class="selector-item" id="selector-photocards" (click)="changeSortCriteria('photocards')" [class.selected]="sortCriteria == 'photocards'">PHOTOCARDS</span>
+    <span class="selector-item">//</span>
+    <span class="selector-item" id="selector-score" (click)="changeSortCriteria('score')" [class.selected]="sortCriteria === 'score'">SCORE</span>
+  </div>
+
+
+  <table class="leaderboard-table">
+    <thead>
+    <tr>
+      <th>Nº</th>
+      <th>Entrenador</th>
+      <th>Photocards</th>
+      <th>Puntos</th>
+      <th>Album</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let user of data; let posStat = index">
+      <td>
+        <ng-container *ngIf="posStat === 0">
+          🥇
+        </ng-container>
+        <ng-container *ngIf="posStat === 1">
+          🥈
+        </ng-container>
+        <ng-container *ngIf="posStat === 2">
+          🥉
+        </ng-container>
+        <ng-container *ngIf="posStat > 2">
+          {{posStat + 1}}
+        </ng-container>
+      </td>
+      <td class="user-info">
+        <img [src]="user.avatar" alt="{{user.username}}'s avatar" class="avatar-icon" />
+        {{user.username}}
+      </td>
+      <td>{{user.photoCards || 0}}</td>
+      <td>{{user.score}}</td>
+      <td>
+        <button class="btn btn-primary" (click)="viewAlbum(user.username)">Ver</button>
+      </td>
+    </tr>
+    </tbody>
+  </table>
+</div>
