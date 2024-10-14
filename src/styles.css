@@ -1,1 +1,16 @@
-/* You can add global styles to this file, and also import other style files */
+:root {
+  --peach: #FFDFD6;
+  --pink: #E3A5C7;
+  --light-purple: #f1e7f2;
+  --purple: #7E60BF;
+  --dark-purple: #433878;
+  --other-pink: #e2a5c6;
+  --light-pink: #FFE1FF;
+  --purple-letter: #b99fc5;
+}
+
+
+
+body {
+  background: linear-gradient(90deg, var(--peach), var(--purple));
+}
