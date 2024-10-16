@@ -63,11 +63,11 @@ export class PhotocardsComponent implements OnInit {
         case 'group':
           return a.band.localeCompare(b.band);
         case 'attack':
-          return a.attack - b.attack;
+          return b.attack - a.attack;
         case 'defense':
-          return a.defense - b.defense;
+          return b.defense - a.defense;
         case 'hp':
-          return a.hp - b.hp;
+          return b.hp - a.hp;
         default:
           return 0;
       }

@@ -20,17 +20,19 @@
     <div class="card-name">
       <span>{{ card.name }}</span> <span> - </span> <span>{{ card.band }}</span>
     </div>
-    <div class="card-separator"></div>
-    <div class="card-stats">
-      <p><span class="stat-label">Posicion</span> <span class="stat-value">{{ card.initialIndex + 1 }}</span></p>
-      <p><span class="stat-label">Idol</span> <span class="stat-value">{{ card.idolID }}</span></p>
-      <p><span class="stat-label">Popularidad</span> <span class="stat-value">{{ card.popularity }}</span></p>
-      <p><span class="stat-label">Tipo</span> <span class="stat-value">{{ card.type}}</span></p>
-      <p><span class="stat-label">Subtipo</span> <span class="stat-value">{{ card.type2 }}</span></p>
-      <br>
-      <p><span class="stat-label">HP</span> <span class="stat-value">{{ card.hp }}</span></p>
-      <p><span class="stat-label">ATK</span> <span class="stat-value">{{ card.attack }}</span></p>
-      <p><span class="stat-label">DEF</span> <span class="stat-value">{{ card.defense }}</span></p>
+    <div class="card-details">
+      <div class="card-separator"></div>
+      <div class="card-stats">
+        <p><span class="stat-label">Posicion</span> <span class="stat-value">{{ card.initialIndex + 1 }}</span></p>
+        <p><span class="stat-label">Idol</span> <span class="stat-value">{{ card.idolID }}</span></p>
+        <p><span class="stat-label">Popularidad</span> <span class="stat-value">{{ card.popularity }}</span></p>
+        <p><span class="stat-label">Tipo</span> <span class="stat-value">{{ card.type}}</span></p>
+        <p><span class="stat-label">Subtipo</span> <span class="stat-value">{{ card.type2 }}</span></p>
+        <br>
+        <p><span class="stat-label">HP</span> <span class="stat-value">{{ card.hp }}</span></p>
+        <p><span class="stat-label">ATK</span> <span class="stat-value">{{ card.attack }}</span></p>
+        <p><span class="stat-label">DEF</span> <span class="stat-value">{{ card.defense }}</span></p>
+      </div>
     </div>
   </div>
 </div>
