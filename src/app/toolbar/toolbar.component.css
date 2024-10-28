@@ -3,8 +3,8 @@
 }
 
 .icon {
-  width: 30px;
-  height: 30px;
+  width: 40px;
+  height: 40px;
 }
 
 .toolbar {
@@ -14,9 +14,22 @@
   font-family: 'Bebas Neue', sans-serif;
   color: #fff;
   height: 5em;
+  border-radius: 10px;
+  margin-bottom: 20px;
 }
 
 a {
   color: #fff;
   text-decoration: none;
+}
+
+a:hover {
+  color: #fff;
+  text-decoration: underline;
+}
+
+.user-icon {
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
 }

@@ -33,6 +33,11 @@
         <p><span class="stat-label">ATK</span> <span class="stat-value">{{ card.attack }}</span></p>
         <p><span class="stat-label">DEF</span> <span class="stat-value">{{ card.defense }}</span></p>
       </div>
+
+      <div *ngIf="myPage" class="card-actions">
+        <div class="card-separator"></div>
+        <button id="select" class="card-action" (click)="selectCard(card)"></button>
+        <button id="delete" class="card-action" (click)="deleteCard(card)"></button>
     </div>
   </div>
 </div>

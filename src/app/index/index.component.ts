@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 
 @Component({
   selector: 'app-index',
@@ -15,5 +15,4 @@ export class IndexComponent {
       window.location.href = '/photocards/' + searchTerm;
     }
   }
-
 }

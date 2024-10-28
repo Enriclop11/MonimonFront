@@ -88,7 +88,7 @@ table tr th:last-child {
   border-right: 0;
 }
 
-.btn {
+.btn-leaderboard {
   background-color: var(--purple-letter);
   color: var(--purple);
   font-family: 'Bebas Neue', sans-serif;

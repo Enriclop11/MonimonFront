@@ -1,0 +1,46 @@
+<div class="top-buttons">
+  <div class="my-cards">
+    <a class="btn" (click)="myCards()">Mis Cartas</a>
+  </div>
+
+  <div class="change-password">
+    <a class="btn" (click)="toggleChangePassword()">Cambiar Contraseña</a>
+  </div>
+
+  <div class="logout">
+    <a class="btn" (click)="logout()">Log Out</a>
+  </div>
+
+</div>
+
+<div class="profile-container">
+
+  <div class="selected-cards-container">
+
+    <div class="selected-cards" *ngIf="selectedCards.length > 0">
+      <div class="selected-cards-title">TU EQUIPO</div>
+      <div class="selected-cards-list">
+        <div class="selected-card" *ngFor="let card of selectedCards">
+          <img [src]="card.photo" [alt]="card.idolID" class="card-photo">
+          <div class="card-name">
+            <span>{{ card.name }}</span> <span> - </span> <span>{{ card.band }}</span>
+          </div>
+          <div class="card-details">
+            <div class="card-separator"></div>
+            <div class="card-stats">
+              <p><span class="stat-label">Idol</span> <span class="stat-value">{{ card.idolID }}</span></p>
+              <p><span class="stat-label">Popularidad</span> <span class="stat-value">{{ card.popularity }}</span></p>
+              <p><span class="stat-label">Tipo</span> <span class="stat-value">{{ card.type}}</span></p>
+              <p><span class="stat-label">Subtipo</span> <span class="stat-value">{{ card.type2 }}</span></p>
+              <br>
+              <p><span class="stat-label">HP</span> <span class="stat-value">{{ card.hp }}</span></p>
+              <p><span class="stat-label">ATK</span> <span class="stat-value">{{ card.attack }}</span></p>
+              <p><span class="stat-label">DEF</span> <span class="stat-value">{{ card.defense }}</span></p>
+            </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+</div>

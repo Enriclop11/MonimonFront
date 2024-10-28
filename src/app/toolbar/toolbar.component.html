@@ -1,22 +1,22 @@
-<!--
 <mat-toolbar class="toolbar ">
 
   <a routerLink="/">
-    <mat-icon>
-      <img class="icon" ngSrc="assets/icon.jpeg" alt="Monimon" [width]="30" [height]="30"/>
-    </mat-icon>
-    <span>Monimon</span>
+      <img class="icon" ngSrc="assets/icon.png" alt="Monimon" [width]="30" [height]="30"/>
   </a>
 
   <span class="spacer"></span>
 
   <a mat-button routerLink="/leaderboard">Leaderboard</a>
 
-  <mat-form-field class="search-container">
-    <input matInput type="text" name="searchterm" placeholder="Search users..." (keydown.enter)="onSearch()">
-  </mat-form-field>
-
   <span class="spacer"></span>
 
+  <a mat-button *ngIf="image" routerLink="/profile" class="user-data">
+    <img class="user-icon" ngSrc="{{image}}" alt="" [width]="30" [height]="30"/>
+  </a>
+
+  <a mat-button routerLink="/profile" class="user-data">
+    {{username}}
+  </a>
+
 </mat-toolbar>
--->
+

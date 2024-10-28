@@ -12,5 +12,23 @@
 
 
 body {
-  background: linear-gradient(90deg, var(--peach), var(--purple));
+  background: linear-gradient(90deg, var(--peach), var(--purple-letter));
+}
+
+.btn {
+  background-color: var(--purple);
+  color: #fff;
+  padding: 15px 30px;
+  text-decoration: none;
+  font-size: 1.2em;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  transition: background-color 0.3s, transform 0.3s;
+  cursor: pointer;
+  margin-bottom: 20px;
+}
+
+.btn:hover {
+  background-color: var(--dark-purple);
+  transform: scale(1.05);
 }
