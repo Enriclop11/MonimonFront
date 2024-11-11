@@ -36,9 +36,6 @@ export class LeaderboardComponent implements OnInit {
   }
 
   sortUsers(): void {
-
-    this.data = this.data.filter((item: any) => item.photoCards && item.photoCards.length > 0);
-
     this.data.sort((a: any, b: any) => {
       switch (this.sortCriteria) {
         case 'photocards':
