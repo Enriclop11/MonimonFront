@@ -34,7 +34,7 @@ import {trigger, state, style, transition, animate, keyframes} from '@angular/an
 })
 export class CombatComponent implements OnInit {
 
-  url = 'ws://localhost:8080/card-websocket';
+  url = 'ws://https://kpopcardbot.onrender.com/card-websocket';
   combatActive = false;
   card1 : any;
   card2 : any;
