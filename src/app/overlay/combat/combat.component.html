@@ -1,0 +1,18 @@
+<div class="arena" *ngIf="combatActive">
+  <div id="card1" class="card" [@cardAnimation]="card1AnimationState">
+    <div class="card-body">
+      <img [src]="card1.photo" alt="combatant1.name" class="image" />
+      <div class="hp-bar">
+        <div class="hp-bar-fill" [style.width.%]="card1.hpWidth" [style.background-color]="card1.hpColor"></div>
+      </div>
+    </div>
+  </div>
+  <div id="card2" class="card" [@cardAnimation]="card2AnimationState">
+    <div class="card-body">
+      <img [src]="card2.photo" alt="combatant2.name" class="image" />
+      <div class="hp-bar">
+        <div class="hp-bar-fill" [style.width.%]="card2.hpWidth" [style.background-color]="card2.hpColor"></div>
+      </div>
+    </div>
+  </div>
+</div>
