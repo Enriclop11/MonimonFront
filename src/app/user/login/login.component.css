@@ -67,3 +67,7 @@
   font-family: 'Arial', sans-serif;
   margin-top: 20px;
 }
+
+body {
+  background: linear-gradient(90deg, var(--peach), var(--purple-letter));
+}

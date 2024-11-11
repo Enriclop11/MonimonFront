@@ -1,3 +1,5 @@
+<app-toolbar></app-toolbar>
+
 <div class="top-buttons">
   <div class="my-cards">
     <a class="btn" (click)="myCards()">Mis Cartas</a>
@@ -36,6 +38,10 @@
               <p><span class="stat-label">HP</span> <span class="stat-value">{{ card.hp }}</span></p>
               <p><span class="stat-label">ATK</span> <span class="stat-value">{{ card.attack }}</span></p>
               <p><span class="stat-label">DEF</span> <span class="stat-value">{{ card.defense }}</span></p>
+            </div>
+            <div class="card-actions">
+              <div class="card-separator"></div>
+              <button id="select" class="card-action" (click)="deselectCard(card)"></button>
             </div>
         </div>
       </div>

@@ -9,8 +9,6 @@
   --purple-letter: #b99fc5;
 }
 
-
-
 body {
   background: linear-gradient(90deg, var(--peach), var(--purple-letter));
 }

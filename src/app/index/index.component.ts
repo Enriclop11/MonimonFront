@@ -1,9 +1,12 @@
 import {Component, OnInit} from '@angular/core';
+import {ToolbarComponent} from "../settings/toolbar/toolbar.component";
 
 @Component({
   selector: 'app-index',
   standalone: true,
-  imports: [],
+    imports: [
+        ToolbarComponent
+    ],
   templateUrl: './index.component.html',
   styleUrl: './index.component.css'
 })

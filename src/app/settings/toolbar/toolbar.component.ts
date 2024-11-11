@@ -7,7 +7,7 @@ import {MatAnchor, MatIconButton} from '@angular/material/button';
 import {MatInput} from '@angular/material/input';
 import {Router, RouterLink} from '@angular/router';
 import {NgIf, NgOptimizedImage} from '@angular/common';
-import {ApiMonitasService} from '../api-monitas.service';
+import {ApiMonitasService} from '../../api-monitas.service';
 
 @Component({
   selector: 'app-toolbar',

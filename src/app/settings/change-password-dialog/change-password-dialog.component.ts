@@ -8,7 +8,7 @@ import {
 } from '@angular/material/dialog';
 import {FormsModule} from '@angular/forms';
 import {MatButton} from '@angular/material/button';
-import {ApiMonitasService} from '../api-monitas.service';
+import {ApiMonitasService} from '../../api-monitas.service';
 import {NgIf} from '@angular/common';
 
 @Component({

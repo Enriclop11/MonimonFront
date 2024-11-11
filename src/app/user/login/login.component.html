@@ -1,3 +1,5 @@
+<app-toolbar></app-toolbar>
+
 <div class="login-panel">
   <h2 class="title">User Login</h2>
   <form (ngSubmit)="login()" #loginForm="ngForm" class="login-container">
@@ -12,4 +14,8 @@
     <button class="login-button" type="submit" [disabled]="!loginForm.valid">Login</button>
     <div *ngIf="errorMessage" class="error-message">{{errorMessage}}</div>
   </form>
+
+  <button class="twitch-login-button" (click)="twitchLogin()">Login with Twitch</button>
+  <div class="twitch-login-info">Si te logueas con Twitch, se te reseteará la contraseña</div>
+
 </div>

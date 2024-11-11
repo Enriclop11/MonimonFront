@@ -20,10 +20,6 @@ export class ApiMonitasService {
     return this.http.get(this.apiUrl + 'users/' + user);
   }
 
-  getPhotocardById(id: number): Observable<any> {
-    return this.http.get(this.apiUrl + 'pokemons/' + id);
-  }
-
   getAllUsers(): Observable<any> {
     return this.http.get(this.apiUrl + 'users');
   }
@@ -49,5 +45,8 @@ export class ApiMonitasService {
     return this.http.delete(this.apiUrl + 'deleteCard/' + cardId, {headers: {Authorization: 'Bearer ' + token}});
   }
 
+  sendLoginTwitch(code: string): Observable<any> {
+    return this.http.post(this.apiUrl + 'loginTwitch', {code}, { responseType: 'json' });
+  }
 
 }

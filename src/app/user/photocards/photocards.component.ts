@@ -1,27 +1,34 @@
 import { Component, OnInit } from '@angular/core';
 import {CommonModule, NgOptimizedImage} from '@angular/common';
 import { ActivatedRoute, Router } from '@angular/router';
-import { ApiMonitasService } from '../api-monitas.service';
-import {ConfirmDialogComponent} from '../confirm-dialog/confirm-dialog.component';
+import { ApiMonitasService } from '../../api-monitas.service';
+import {ConfirmDialogComponent} from '../../settings/confirm-dialog/confirm-dialog.component';
 import {MatDialog} from '@angular/material/dialog';
 import {firstValueFrom} from 'rxjs';
+import {ToolbarComponent} from '../../settings/toolbar/toolbar.component';
+import {FormsModule} from '@angular/forms';
 
 @Component({
   selector: 'app-photocards',
   standalone: true,
-  imports: [CommonModule, NgOptimizedImage],
+  imports: [CommonModule, NgOptimizedImage, ToolbarComponent, FormsModule],
   templateUrl: './photocards.component.html',
   styleUrls: ['./photocards.component.css']
 })
 export class PhotocardsComponent implements OnInit {
   user: string = '';
   token: string = '';
+  originalData: any = {
+    username: '',
+    photoCards: []
+  }
   data: any = {
     username: '',
     photoCards: []
   };
   sortCriteria: string = 'index';
   myPage: boolean = false;
+  searchName: any;
 
   constructor(
     private readonly apiMonitasService: ApiMonitasService,
@@ -41,6 +48,8 @@ export class PhotocardsComponent implements OnInit {
               ...item,
               initialIndex: index
             }));
+
+            this.originalData = { ...this.data };
           } else {
             console.error('photoCards is not an array:', data.photoCards);
           }
@@ -149,5 +158,21 @@ export class PhotocardsComponent implements OnInit {
         alert('Error selecting card');
       }
     });
+  }
+
+  search(event: any) {
+    this.searchName = event.target.value.toLowerCase();
+
+    if (this.searchName === '') {
+      // If the searchName is empty, reset to originalData
+      this.data.photoCards = [...this.originalData.photoCards];
+    } else {
+      // Filter the photoCards array by containing the searchName in either name or band
+      this.data.photoCards = this.originalData.photoCards.filter((item: any) => {
+        return item.name.toLowerCase().includes(this.searchName) || item.band.toLowerCase().includes(this.searchName);
+      });
+    }
+
+    this.sortPhotoCards({ target: { value: this.sortCriteria } });
   }
 }

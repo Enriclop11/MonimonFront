@@ -1,3 +1,5 @@
+<app-toolbar></app-toolbar>
+
 <h1 class="title">{{ 'Album de ' + data.username}}</h1>
 
 <div class="selector">
@@ -12,6 +14,10 @@
   <span class="selector-item" id="selector-defense" (click)="changeSortCriteria('defense')" [class.selected]="sortCriteria === 'defense'">Defensa</span>
   <span class="selector-item">//</span>
   <span class="selector-item" id="selector-hp" (click)="changeSortCriteria('hp')" [class.selected]="sortCriteria === 'hp'">HP</span>
+</div>
+
+<div class="search">
+  <input type="text" class="search-input" placeholder="Buscar..." (input)="search($event)">
 </div>
 
 <div class="photoCardsContainer">
@@ -38,6 +44,6 @@
         <div class="card-separator"></div>
         <button id="select" class="card-action" (click)="selectCard(card)"></button>
         <button id="delete" class="card-action" (click)="deleteCard(card)"></button>
-    </div>
+      </div>
   </div>
 </div>

@@ -1,9 +1,9 @@
 import { Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { MatToolbarModule } from '@angular/material/toolbar';
-import { PhotocardsComponent } from './photocards/photocards.component';
+import { PhotocardsComponent } from './user/photocards/photocards.component';
 import { IndexComponent } from './index/index.component';
-import { ToolbarComponent } from './toolbar/toolbar.component';
+import { ToolbarComponent } from './settings/toolbar/toolbar.component';
 
 @Component({
   selector: 'app-root',

@@ -1,15 +1,17 @@
 import {Component, OnInit} from '@angular/core';
-import {ApiMonitasService} from '../api-monitas.service';
+import {ApiMonitasService} from '../../api-monitas.service';
 import {NgForOf, NgIf, NgOptimizedImage} from '@angular/common';
+import {ToolbarComponent} from "../../settings/toolbar/toolbar.component";
 
 @Component({
   selector: 'app-leaderboard',
   standalone: true,
-  imports: [
-    NgForOf,
-    NgOptimizedImage,
-    NgIf
-  ],
+    imports: [
+        NgForOf,
+        NgOptimizedImage,
+        NgIf,
+        ToolbarComponent
+    ],
   templateUrl: './leaderboard.component.html',
   styleUrl: './leaderboard.component.css'
 })
@@ -34,6 +36,9 @@ export class LeaderboardComponent implements OnInit {
   }
 
   sortUsers(): void {
+
+    this.data = this.data.filter((item: any) => item.photoCards && item.photoCards.length > 0);
+
     this.data.sort((a: any, b: any) => {
       switch (this.sortCriteria) {
         case 'photocards':

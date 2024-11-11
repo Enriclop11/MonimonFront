@@ -135,3 +135,7 @@ table tr th:last-child {
     height: 25px;
   }
 }
+
+body {
+  background: linear-gradient(90deg, var(--peach), var(--purple-letter));
+}
