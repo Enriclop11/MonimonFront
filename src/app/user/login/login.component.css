@@ -71,3 +71,27 @@
 body {
   background: linear-gradient(90deg, var(--peach), var(--purple-letter));
 }
+
+.twitch-login-button {
+  background-color: var(--purple-letter);
+  color: var(--purple);
+  font-size: 1.5em;
+  padding: 10px;
+  border-radius: 5px;
+  border: none;
+  margin-top: 20px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  font-family: 'Bebas Neue', sans-serif;
+  box-shadow: 4px 4px 8px rgba(0, 0, 0, 0.8);
+}
+
+.twitch-login-button:hover {
+  transform: scale(1.1);
+}
+
+.twitch-login-info {
+  font-size: 1.2em;
+  font-family: 'Bebas Neue', sans-serif;
+  margin-top: 20px;
+}

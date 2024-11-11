@@ -11,6 +11,7 @@
       <label class="login-label" for="password">Password</label>
       <input class="login-input" type="password" id="password" name="password" [(ngModel)]="password" required>
     </div>
+    <br>
     <button class="login-button" type="submit" [disabled]="!loginForm.valid">Login</button>
     <div *ngIf="errorMessage" class="error-message">{{errorMessage}}</div>
   </form>
