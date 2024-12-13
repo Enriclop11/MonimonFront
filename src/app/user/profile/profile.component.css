@@ -103,3 +103,33 @@
 #select {
   background-image: url('/assets/select_button.png');
 }
+
+.score-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-top: 20px;
+  border: 2px solid var(--dark-purple);
+  padding: 20px;
+  background-color: var(--light-purple);
+  border-radius: 15px;
+  position: fixed;
+  right: 20px;
+  top: 80px;
+}
+
+.score-title {
+  font-size: 1.5em;
+  font-weight: bold;
+  color: var(--dark-purple);
+  font-family: 'Bebas Neue', sans-serif;
+  margin-bottom: 10px;
+}
+
+.score {
+  font-size: 2em;
+  font-weight: bold;
+  color: var(--dark-purple);
+  font-family: 'Bebas Neue', sans-serif;
+}

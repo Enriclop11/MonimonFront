@@ -17,6 +17,7 @@ import {ToolbarComponent} from "../../settings/toolbar/toolbar.component";
 })
 export class LeaderboardComponent implements OnInit {
   data: any = [];
+  leaderBoard: any = [];
 
   //we can sort the data by different criteria by the number of photocards or the score, we have to know what the user wants to sort by
   sortCriteria: string = 'photocards';
@@ -46,6 +47,8 @@ export class LeaderboardComponent implements OnInit {
           return 0;
       }
     });
+
+    this.leaderBoard = this.data.slice(0, 20);
   }
 
   viewAlbum(user: any): void {
