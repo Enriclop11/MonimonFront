@@ -8,6 +8,9 @@ import {
 } from '@angular/material/dialog';
 import { MatButton } from '@angular/material/button';
 import {NgIf} from '@angular/common';
+import {MatFormField} from '@angular/material/form-field';
+import {MatInput} from '@angular/material/input';
+import {FormsModule} from '@angular/forms';
 
 @Component({
   selector: 'app-confirm-dialog',
@@ -18,18 +21,23 @@ import {NgIf} from '@angular/common';
     MatDialogContent,
     MatDialogActions,
     MatButton,
-    NgIf
+    NgIf,
+    MatFormField,
+    MatInput,
+    FormsModule
   ],
   styleUrls: ['./confirm-dialog.component.css']
 })
 export class ConfirmDialogComponent {
+  inputValue: string = '';
+
   constructor(
     public dialogRef: MatDialogRef<ConfirmDialogComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any
   ) {}
 
   onConfirm(): void {
-    this.dialogRef.close(true);
+    this.dialogRef.close({ confirmed: true, inputValue: this.inputValue });
   }
 
   onCancel(): void {

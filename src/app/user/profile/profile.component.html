@@ -28,7 +28,9 @@
       <div class="selected-cards-title">TU EQUIPO</div>
       <div class="selected-cards-list">
         <div class="selected-card" *ngFor="let card of selectedCards">
-          <img [src]="card.photo" [alt]="card.idolID" class="card-photo">
+          <div class="card-photo-wrapper">
+            <img [src]="card.photo" [alt]="card.idolID" class="card-photo">
+          </div>
           <div class="card-name">
             <span>{{ card.name }}</span> <span> - </span> <span>{{ card.band }}</span>
           </div>

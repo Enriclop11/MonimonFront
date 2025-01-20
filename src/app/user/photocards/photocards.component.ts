@@ -1,17 +1,18 @@
 import { Component, OnInit } from '@angular/core';
-import {CommonModule, NgOptimizedImage} from '@angular/common';
+import { CommonModule, NgOptimizedImage } from '@angular/common';
 import { ActivatedRoute, Router } from '@angular/router';
-import { ApiMonitasService } from '../../api-monitas.service';
-import {ConfirmDialogComponent} from '../../settings/confirm-dialog/confirm-dialog.component';
-import {MatDialog} from '@angular/material/dialog';
-import {firstValueFrom} from 'rxjs';
-import {ToolbarComponent} from '../../settings/toolbar/toolbar.component';
-import {FormsModule} from '@angular/forms';
+import { ConfirmDialogComponent } from '../../settings/confirm-dialog/confirm-dialog.component';
+import { MatDialog } from '@angular/material/dialog';
+import { firstValueFrom } from 'rxjs';
+import { ToolbarComponent } from '../../settings/toolbar/toolbar.component';
+import { FormsModule } from '@angular/forms';
+import { ApiMonitasService } from '../../service/api-monitas.service';
+import {MatProgressSpinner} from '@angular/material/progress-spinner';
 
 @Component({
   selector: 'app-photocards',
   standalone: true,
-  imports: [CommonModule, NgOptimizedImage, ToolbarComponent, FormsModule],
+  imports: [CommonModule, NgOptimizedImage, ToolbarComponent, FormsModule, MatProgressSpinner],
   templateUrl: './photocards.component.html',
   styleUrls: ['./photocards.component.css']
 })
@@ -38,43 +39,12 @@ export class PhotocardsComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.route.paramMap.subscribe(params => {
-      this.user = params.get('user') || '';
-      this.apiMonitasService.getUserInfo(this.user).subscribe(
-        (data) => {
-          if (Array.isArray(data.photoCards)) {
-            this.data = data;
-            this.data.photoCards = data.photoCards.map((item: any, index: number) => ({
-              ...item,
-              initialIndex: index
-            }));
-
-            this.originalData = { ...this.data };
-          } else {
-            console.error('photoCards is not an array:', data.photoCards);
-          }
-        },
-        (error) => {
-          console.error('Failed to fetch user info:', error);
-          this.router.navigate(['/']);
-        }
-      );
-    });
-
-    if (localStorage.getItem('token')) {
+    this.route.data.subscribe((data) => {
+      this.data = data['data'];
+      this.originalData = { ...this.data };
+      this.myPage = data['data'].myPage;
       this.token = localStorage.getItem('token') || '';
-      this.apiMonitasService.getMyUser(this.token).subscribe({
-        next: (data) => {
-          if (data.username === this.user) {
-            this.myPage = true;
-            console.log('This is my page');
-          }
-        },
-        error: (error) => {
-          console.error('Failed to fetch user info:', error);
-        }
-      });
-    }
+    });
   }
 
   changeSortCriteria(criteria: string): void {
@@ -104,12 +74,12 @@ export class PhotocardsComponent implements OnInit {
     });
   }
 
-  async confirmDelete(): Promise<boolean> {
+  async confirmDelete(card: any, price: number): Promise<boolean> {
     const dialogRef = this.dialog.open(ConfirmDialogComponent, {
       width: '250px',
       data: {
         title: 'Confirmar Eliminación',
-        message: '¿Estás seguro de que deseas eliminar esta carta?',
+        message: 'Estás seguro de que deseas eliminar la carta de ' + card.name + ' por ' + price + ' monedas?',
         showCancelButton: true
       }
     });
@@ -119,11 +89,13 @@ export class PhotocardsComponent implements OnInit {
   }
 
   async deleteCard(card: any) {
-    const confirmed = await this.confirmDelete();
+    let priceHttp = this.apiMonitasService.getCardPrice(card.id);
+    let price = await firstValueFrom(priceHttp);
+
+    const confirmed = await this.confirmDelete(card, price);
     if (confirmed) {
       this.apiMonitasService.deleteCard(this.token, card.id).subscribe({
         next: (data) => {
-
           this.dialog.open(ConfirmDialogComponent, {
             width: '250px',
             data: {
@@ -131,8 +103,9 @@ export class PhotocardsComponent implements OnInit {
               message: 'La carta de ' + card.name + ' ha sido eliminada',
               showCancelButton: false
             }
-          })
+          });
 
+          this.data.score += price;
           this.data.photoCards = this.data.photoCards.filter((item: any) => item.id !== card.id);
         },
         error: (error) => {
@@ -164,15 +137,50 @@ export class PhotocardsComponent implements OnInit {
     this.searchName = event.target.value.toLowerCase();
 
     if (this.searchName === '') {
-      // If the searchName is empty, reset to originalData
       this.data.photoCards = [...this.originalData.photoCards];
     } else {
-      // Filter the photoCards array by containing the searchName in either name or band
       this.data.photoCards = this.originalData.photoCards.filter((item: any) => {
         return item.name.toLowerCase().includes(this.searchName) || item.band.toLowerCase().includes(this.searchName);
       });
     }
 
     this.sortPhotoCards({ target: { value: this.sortCriteria } });
+  }
+
+  async offerCard(card: any) {
+    const dialogRef = this.dialog.open(ConfirmDialogComponent, {
+      width: '250px',
+      data: {
+        title: 'Offer Card',
+        message: 'Enter the price for the card:',
+        showCancelButton: true,
+        showInput: true
+      }
+    });
+
+    const result = await firstValueFrom(dialogRef.afterClosed());
+    if (result.confirmed) {
+      const price = parseFloat(result.inputValue);
+      if (!isNaN(price)) {
+        this.apiMonitasService.offerMarketplace(card.id, price, this.token).subscribe({
+          next: (data) => {
+            this.dialog.open(ConfirmDialogComponent, {
+              width: '250px',
+              data: {
+                title: 'Card Offered',
+                message: 'The card has been offered for ' + price + ' coins.',
+                showCancelButton: false
+              }
+            });
+          },
+          error: (error) => {
+            console.log(error);
+            alert('Error offering card');
+          }
+        });
+      } else {
+        alert('Invalid price entered');
+      }
+    }
   }
 }

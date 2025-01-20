@@ -132,16 +132,12 @@
   cursor: pointer;
 }
 
-#delete {
+#sell {
   background-image: url('/assets/delete_button.png');
 }
 
-#select {
-  background-image: url('/assets/select_button.png');
-}
-
-#offer {
-  background-image: url('/assets/sell_button.png');
+#buy {
+  background-image: url('/assets/buy_button.png');
 }
 
 .search {
