@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
-import {ApiMonitasService} from '../../api-monitas.service';
 import {NgForOf, NgIf, NgOptimizedImage} from '@angular/common';
 import {ToolbarComponent} from "../../settings/toolbar/toolbar.component";
+import {ActivatedRoute} from '@angular/router';
 
 @Component({
   selector: 'app-leaderboard',
@@ -18,15 +18,13 @@ import {ToolbarComponent} from "../../settings/toolbar/toolbar.component";
 export class LeaderboardComponent implements OnInit {
   data: any = [];
   leaderBoard: any = [];
-
-  //we can sort the data by different criteria by the number of photocards or the score, we have to know what the user wants to sort by
   sortCriteria: string = 'photocards';
 
-  constructor(private apiMonitasService: ApiMonitasService) {}
+  constructor(private route: ActivatedRoute) {}
 
   ngOnInit(): void {
-    this.apiMonitasService.getAllUsers().subscribe((data) => {
-      this.data = data;
+    this.route.data.subscribe((data) => {
+      this.data = data['data'];
       this.sortUsers();
     });
   }

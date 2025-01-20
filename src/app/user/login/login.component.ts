@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {FormsModule} from '@angular/forms';
-import {ApiMonitasService} from '../../api-monitas.service';
+import {ApiMonitasService} from '../../service/api-monitas.service';
 import {NgIf} from '@angular/common';
 import {ToolbarComponent} from "../../settings/toolbar/toolbar.component";
 
@@ -36,12 +36,12 @@ export class LoginComponent implements OnInit {
     if (accessToken) {
 
       this.apiMonitasService.sendLoginTwitch(accessToken).subscribe({
-        next: (data) => {
+        next: (data: any) => {
           console.log('Got token:', data.token);
           localStorage.setItem('token', data.token);
           window.location.href = 'profile';
         },
-        error: (error) => {
+        error: (error: any) => {
           console.error('Error:', error);
           this.errorMessage = error.error.message;
         }
@@ -53,13 +53,13 @@ export class LoginComponent implements OnInit {
 
   login() {
     this.apiMonitasService.getToken(this.username, this.password).subscribe({
-      next: (data) => {
+      next: (data: any) => {
         console.log('Got token:', data.token);
         localStorage.setItem('token', data.token);
 
         window.location.href = 'profile';
       },
-      error: (error) => {
+      error: (error: any) => {
         console.error('Error:', error);
         this.errorMessage = error.error.message;
       }

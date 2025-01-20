@@ -1,10 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { ApiMonitasService } from '../../api-monitas.service';
+import { ApiMonitasService } from '../../service/api-monitas.service';
 import { FormsModule } from '@angular/forms';
 import {NgForOf, NgIf} from '@angular/common';
 import {ChangePasswordDialogComponent} from '../../settings/change-password-dialog/change-password-dialog.component';
 import {MatDialog} from '@angular/material/dialog';
 import {ToolbarComponent} from '../../settings/toolbar/toolbar.component';
+import {ActivatedRoute} from '@angular/router';
 
 @Component({
   selector: 'app-profile',
@@ -18,7 +19,11 @@ export class ProfileComponent implements OnInit {
   userInfo: any = {};
   selectedCards: any = [];
 
-  constructor(private readonly apiMonitasService: ApiMonitasService, private dialog: MatDialog) {}
+  constructor(
+    private readonly apiMonitasService: ApiMonitasService,
+    private dialog: MatDialog,
+    private readonly route: ActivatedRoute
+  ) {}
 
   ngOnInit() {
     if (!localStorage.getItem('token')) {
@@ -27,31 +32,17 @@ export class ProfileComponent implements OnInit {
       this.token = localStorage.getItem('token');
     }
 
-    this.getUserInfo();
+    this.route.data.subscribe((data) => {
+      this.userInfo = data['profileData'];
+      if (this.userInfo.photoCardSelected) {
+        this.selectedCards = this.userInfo.photoCardSelected;
+      }
+    });
   }
 
   toggleChangePassword(): void {
     this.dialog.open(ChangePasswordDialogComponent, {
       data: { token: this.token }
-    });
-  }
-
-  getUserInfo() {
-    this.apiMonitasService.getMyUser(this.token).subscribe({
-      next: (data) => {
-        this.userInfo = data;
-        console.log(this.userInfo);
-
-        if (this.userInfo.photoCardSelected) {
-          this.selectedCards = this.userInfo.photoCardSelected;
-        }
-
-        console.log(this.selectedCards);
-
-      },
-      error: (error) => {
-        console.log('Error getting user info');
-      }
     });
   }
 
@@ -74,4 +65,21 @@ export class ProfileComponent implements OnInit {
       }
     });
   }
+
+  getUserInfo() {
+    this.apiMonitasService.getMyUser(this.token).subscribe({
+      next: (data) => {
+        if (data) {
+          this.userInfo = data;
+          if (this.userInfo.photoCardSelected) {
+            this.selectedCards = this.userInfo.photoCardSelected;
+          }
+        }
+      },
+      error: (error) => {
+        console.log('Error getting user info');
+      }
+    });
+  }
+
 }

@@ -1,0 +1,68 @@
+<app-toolbar></app-toolbar>
+
+@if (logedIn) {
+  <div class="score-container">
+    <div class="score-title">PUNTOS</div>
+    <div class="score">{{ user.score }}</div>
+  </div>
+}
+
+<h1 class="title">MARKETPLACE</h1>
+
+<div class="selector">
+  <span class="selector-item" id="selector-index" (click)="changeSortCriteria('index')" [class.selected]="sortCriteria === 'index'">Índice</span>
+  <span class="selector-item">//</span>
+  <span class="selector-item" id="selector-idolID" (click)="changeSortCriteria('idolID')" [class.selected]="sortCriteria === 'idolID'">Idol</span>
+  <span class="selector-item">//</span>
+  <span class="selector-item" id="selector-group" (click)="changeSortCriteria('group')" [class.selected]="sortCriteria === 'group'">Grupo</span>
+  <span class="selector-item">//</span>
+  <span class="selector-item" id="selector-attack" (click)="changeSortCriteria('attack')" [class.selected]="sortCriteria === 'attack'">Ataque</span>
+  <span class="selector-item">//</span>
+  <span class="selector-item" id="selector-defense" (click)="changeSortCriteria('defense')" [class.selected]="sortCriteria === 'defense'">Defensa</span>
+  <span class="selector-item">//</span>
+  <span class="selector-item" id="selector-hp" (click)="changeSortCriteria('hp')" [class.selected]="sortCriteria === 'hp'">HP</span>
+</div>
+
+<div class="search">
+  <input type="text" class="search-input" placeholder="Buscar..." (input)="search($event)">
+</div>
+
+<div class="photoCardsContainer">
+  <div class="card-box" *ngFor="let offer of data">
+    <div class="card-photo-wrapper">
+      <img [src]="offer.photo" [alt]="offer.idolID" class="card-photo">
+    </div>
+    <div class="card-name">
+      <span>{{ offer.name }}</span> <span> - </span> <span>{{ offer.band }}</span>
+    </div>
+    <div class="card-details">
+      <div class="card-separator"></div>
+      <div class="card-stats">
+        <p><span class="stat-label">Idol</span> <span class="stat-value">{{ offer.idolID }}</span></p>
+        <p><span class="stat-label">Popularidad</span> <span class="stat-value">{{ offer.popularity }}</span></p>
+        <p><span class="stat-label">Tipo</span> <span class="stat-value">{{ offer.type}}</span></p>
+        <p><span class="stat-label">Subtipo</span> <span class="stat-value">{{ offer.type2 }}</span></p>
+        <br>
+        <p><span class="stat-label">HP</span> <span class="stat-value">{{ offer.hp }}</span></p>
+        <p><span class="stat-label">ATK</span> <span class="stat-value">{{ offer.attack }}</span></p>
+        <p><span class="stat-label">DEF</span> <span class="stat-value">{{ offer.defense }}</span></p>
+        <br>
+        <p><span class="stat-label">Precio</span> <span class="stat-value">{{ offer.price }}</span></p>
+        <p><span class="stat-label">Dueño</span> <span class="stat-value">{{ offer.owner }}</span></p>
+      </div>
+
+
+      @if (logedIn) {
+        <div class="card-actions">
+          <div class="card-separator"></div>
+          <button id="buy" class="card-action" (click)="buyCard(offer)"></button>
+
+          @if (offer.owner === user.username) {
+            <button id="sell" class="card-action" (click)="returnCard(offer)"></button>
+          }
+
+        </div>
+      }
+
+    </div>
+  </div>
