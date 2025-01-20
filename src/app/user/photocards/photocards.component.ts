@@ -133,6 +133,10 @@ export class PhotocardsComponent implements OnInit {
     });
   }
 
+  flipCard(card: any): void {
+    card.flipped = !card.flipped;
+  }
+
   search(event: any) {
     this.searchName = event.target.value.toLowerCase();
 

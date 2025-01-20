@@ -28,32 +28,36 @@
 </div>
 
 <div class="photoCardsContainer">
-  <div class="card-box" *ngFor="let card of data.photoCards">
-    <div class="card-photo-wrapper">
-      <img [src]="card.photo" [alt]="card.idolID" class="card-photo">
-    </div>
-    <div class="card-name">
-      <span>{{ card.name }}</span> <span> - </span> <span>{{ card.band }}</span>
-    </div>
-    <div class="card-details">
-      <div class="card-separator"></div>
-      <div class="card-stats">
-        <p><span class="stat-label">Posicion</span> <span class="stat-value">{{ card.initialIndex + 1 }}</span></p>
-        <p><span class="stat-label">Idol</span> <span class="stat-value">{{ card.idolID }}</span></p>
-        <p><span class="stat-label">Popularidad</span> <span class="stat-value">{{ card.popularity }}</span></p>
-        <p><span class="stat-label">Tipo</span> <span class="stat-value">{{ card.type}}</span></p>
-        <p><span class="stat-label">Subtipo</span> <span class="stat-value">{{ card.type2 }}</span></p>
-        <br>
-        <p><span class="stat-label">HP</span> <span class="stat-value">{{ card.hp }}</span></p>
-        <p><span class="stat-label">ATK</span> <span class="stat-value">{{ card.attack }}</span></p>
-        <p><span class="stat-label">DEF</span> <span class="stat-value">{{ card.defense }}</span></p>
+  <div class="card-box" *ngFor="let card of data.photoCards" [class.flipped]="card.flipped" (click)="flipCard(card)">
+    <div class="card-inner">
+      <div class="card-front">
+        <div class="card-photo-wrapper">
+          <img [src]="card.photo" [alt]="card.idolID" class="card-photo">
+        </div>
       </div>
+      <div class="card-back">
+        <div class="card-name">
+          <span>{{ card.name }}</span> <span> - </span> <span>{{ card.band }}</span>
+        </div>
+        <div class="card-details">
+          <div class="card-separator"></div>
+          <div class="card-stats">
+            <p><span class="stat-label">Posicion</span> <span class="stat-value">{{ card.initialIndex + 1 }}</span></p>
+            <p><span class="stat-label">Idol</span> <span class="stat-value">{{ card.idolID }}</span></p>
+            <p><span class="stat-label">Popularidad</span> <span class="stat-value">{{ card.popularity }}</span></p>
+            <p><span class="stat-label">Tipo</span> <span class="stat-value">{{ card.type}}</span></p>
+            <p><span class="stat-label">Subtipo</span> <span class="stat-value">{{ card.type2 }}</span></p>
+            <p><span class="stat-label">HP</span> <span class="stat-value">{{ card.hp }}</span></p>
+            <p><span class="stat-label">ATK</span> <span class="stat-value">{{ card.attack }}</span></p>
+            <p><span class="stat-label">DEF</span> <span class="stat-value">{{ card.defense }}</span></p>
+          </div>
 
-      <div *ngIf="myPage" class="card-actions">
-        <div class="card-separator"></div>
-        <button id="select" class="card-action" (click)="selectCard(card)"></button>
-        <button id="offer" class="card-action" (click)="offerCard(card)"></button>
-        <button id="delete" class="card-action" (click)="deleteCard(card)"></button>
+          @if (myPage) {
+            <button id="select" class="card-action" (click)="selectCard(card); $event.stopPropagation()"></button>
+            <button id="offer" class="card-action" (click)="offerCard(card); $event.stopPropagation()"></button>
+            <button id="delete" class="card-action" (click)="deleteCard(card); $event.stopPropagation()"></button>
+          }
+        </div>
       </div>
     </div>
   </div>

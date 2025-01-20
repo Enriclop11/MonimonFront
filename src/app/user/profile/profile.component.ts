@@ -82,4 +82,7 @@ export class ProfileComponent implements OnInit {
     });
   }
 
+  flipCard(card: any) {
+    card.flipped = !card.flipped;
+  }
 }
