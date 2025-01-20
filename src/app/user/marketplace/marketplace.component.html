@@ -57,7 +57,7 @@
           <div class="card-separator"></div>
           <button id="buy" class="card-action" (click)="buyCard(offer)"></button>
 
-          @if (offer.owner === user.username) {
+          @if (offer.owner.toLowerCase() === user.username.toLowerCase()) {
             <button id="sell" class="card-action" (click)="returnCard(offer)"></button>
           }
 
