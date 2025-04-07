@@ -1,0 +1,33 @@
+<div class="dialog-overlay">
+  <div class="dialog-container">
+    <h1 mat-dialog-title>{{ card.name }} - {{ card.band }}</h1>
+    <div mat-dialog-content>
+      <div class="popup-content">
+        <img class="card-image" [src]="card.photo" alt="Card Image">
+        <div class="card-details">
+          <div class="card-stats">
+            <p><span class="stat-label">Idol: </span> <span class="stat-value">{{ card.idolID }}</span></p>
+            <p><span class="stat-label">Popularidad: </span> <span class="stat-value">{{ card.popularity }}</span></p>
+            <p><span class="stat-label">Tipo: </span> <span class="stat-value">{{ card.type}}</span></p>
+            <p><span class="stat-label">Subtipo: </span> <span class="stat-value">{{ card.type2 }}</span></p>
+            <br>
+            <p><span class="stat-label">HP: </span> <span class="stat-value">{{ card.hp }}</span></p>
+            <p><span class="stat-label">ATK: </span> <span class="stat-value">{{ card.attack }}</span></p>
+            <p><span class="stat-label">DEF: </span> <span class="stat-value">{{ card.defense }}</span></p>
+            <br>
+            <p><span class="stat-label">Precio: </span> <span class="stat-value">{{ card.price }}</span></p>
+            <p><span class="stat-label">Dueño: </span> <span class="stat-value">{{ card.owner }}</span></p>
+          </div>
+          <div *ngIf="logedIn" class="card-actions">
+            <div class="card-separator"></div>
+            <button id="buy" class="button-confirm" (click)="buyCard(card)"></button>
+            <button id="sell" class="button-confirm" (click)="returnCard(card)"></button>
+          </div>
+        </div>
+      </div>
+      <div mat-dialog-actions class="button-container">
+        <button mat-button id="confirm-button" class="button-confirm" (click)="closePopup()">Confirmar</button>
+      </div>
+    </div>
+  </div>
+</div>

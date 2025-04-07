@@ -5,6 +5,7 @@ import {ApiMonitasService} from '../../service/api-monitas.service';
 import {MatDialog} from '@angular/material/dialog';
 import {ConfirmDialogComponent} from '../../settings/confirm-dialog/confirm-dialog.component';
 import {ActivatedRoute} from '@angular/router';
+import {MarketplaceInfoPopupComponent} from './marketplace-info-popup/marketplace-info-popup.component';
 
 @Component({
   selector: 'app-marketplace',
@@ -105,65 +106,6 @@ export class MarketplaceComponent implements OnInit {
     });
   }
 
-  buyCard(card: any) {
-    this.dialog.open(ConfirmDialogComponent, {
-      data: {
-        title: 'Comprar carta',
-        message: `Estas seguro que deseas comprar la carta ${card.name} por ${card.price} monedas?`,
-        showCancelButton: true
-      }
-    }).afterClosed().subscribe({
-      next: (result) => {
-        if (result) {
-
-          console.log('User points:', this.user.score);
-          console.log('Card price:', card.price);
-          if (this.user.score < card.price) {
-            this.dialog.open(ConfirmDialogComponent, {
-              data: {
-                title: 'Comprar carta',
-                message: `No tienes suficientes monedas para comprar la carta ${card.name}.`
-              }
-            });
-            return;
-          }
-
-          this.apiMonitasService.buyMarketplace(card.id, this.token).subscribe({
-            next: (data) => {
-              this.getNewInfo();
-            },
-            error: (error) => {
-              console.error('Failed to buy card:', error);
-            }
-          });
-        }
-      }
-    });
-  }
-
-  returnCard(offer: any) {
-    this.dialog.open(ConfirmDialogComponent, {
-      data: {
-        title: 'Retirar carta',
-        message: `Estas seguro que deseas retirar la carta ${offer.name} del mercado?`,
-        showCancelButton: true
-      }
-    }).afterClosed().subscribe({
-      next: (result) => {
-        if (result) {
-          this.apiMonitasService.deleteMarketplace(offer.id, this.token).subscribe({
-            next: (data) => {
-              this.getNewInfo();
-            },
-            error: (error) => {
-              console.error('Failed to return card:', error);
-            }
-          });
-        }
-      }
-    });
-  }
-
   search(event: any) {
     this.searchName = event.target.value.toLowerCase();
 
@@ -180,4 +122,23 @@ export class MarketplaceComponent implements OnInit {
     this.sortPhotoCards({ target: { value: this.sortCriteria } });
   }
 
+  openInfo(offer: any) {
+
+    this.dialog.open(MarketplaceInfoPopupComponent, {
+      width: '500px',
+      data: {
+        card: offer,
+        logedIn: this.logedIn,
+        token: this.token,
+        user: this.user
+      }
+    }).afterClosed().subscribe({
+      next: (result: any) => {
+        if (result) {
+          this.getNewInfo();
+        }
+      }
+    });
+
+  }
 }
