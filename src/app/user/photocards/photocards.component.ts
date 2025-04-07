@@ -85,35 +85,42 @@ export class PhotocardsComponent implements OnInit {
     });
 
     const result = await firstValueFrom(dialogRef.afterClosed());
-    return result === true;
+    return result.confirmed;
   }
 
   async deleteCard(card: any) {
     let priceHttp = this.apiMonitasService.getCardPrice(card.id);
     let price = await firstValueFrom(priceHttp);
 
-    const confirmed = await this.confirmDelete(card, price);
-    if (confirmed) {
-      this.apiMonitasService.deleteCard(this.token, card.id).subscribe({
-        next: (data) => {
-          this.dialog.open(ConfirmDialogComponent, {
-            width: '250px',
-            data: {
-              title: 'Carta Eliminada',
-              message: 'La carta de ' + card.name + ' ha sido eliminada',
-              showCancelButton: false
-            }
-          });
-
-          this.data.score += price;
-          this.data.photoCards = this.data.photoCards.filter((item: any) => item.id !== card.id);
-        },
-        error: (error) => {
-          alert('Error deleting card');
-        }
-      });
-    }
+    await this.confirmDelete(card, price).then( (result) => {
+      if (result) {
+        this.confirmedDelete(card, price);
+      }
+    });
   }
+
+  confirmedDelete(card: any, price: number) {
+    this.apiMonitasService.deleteCard(this.token, card.id).subscribe({
+      next: (data) => {
+        this.dialog.open(ConfirmDialogComponent, {
+          width: '250px',
+          data: {
+            title: 'Carta Eliminada',
+            message: 'La carta de ' + card.name + ' ha sido eliminada',
+            showCancelButton: false
+          }
+        });
+
+        this.data.score += price;
+        this.data.photoCards = this.data.photoCards.filter((item: any) => item.id !== card.id);
+      },
+      error: (error) => {
+        alert('Error deleting card');
+      }
+    });
+  }
+
+
 
   selectCard(card: any) {
     this.apiMonitasService.setSelectedCard(this.token, card.id).subscribe({
@@ -156,7 +163,7 @@ export class PhotocardsComponent implements OnInit {
       width: '250px',
       data: {
         title: 'Offer Card',
-        message: 'Enter the price for the card:',
+        message: 'Entra un precio para la oferta:',
         showCancelButton: true,
         showInput: true
       }
@@ -172,7 +179,7 @@ export class PhotocardsComponent implements OnInit {
               width: '250px',
               data: {
                 title: 'Card Offered',
-                message: 'The card has been offered for ' + price + ' coins.',
+                message: 'La carta ha sido puesta a la venta por ' + price + ' puntos.',
                 showCancelButton: false
               }
             });
