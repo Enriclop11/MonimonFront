@@ -7,7 +7,7 @@ import { ApiMonitasService } from '../../service/api-monitas.service';
   providedIn: 'root'
 })
 export class MarketplaceResolverService implements Resolve<any> {
-  constructor(private apiMonitasService: ApiMonitasService) {}
+  constructor(private readonly apiMonitasService: ApiMonitasService) {}
 
   resolve(): Observable<any> {
     return this.apiMonitasService.getMarketplace();

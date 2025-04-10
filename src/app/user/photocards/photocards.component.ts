@@ -35,7 +35,7 @@ export class PhotocardsComponent implements OnInit {
     private readonly apiMonitasService: ApiMonitasService,
     private readonly route: ActivatedRoute,
     private readonly router: Router,
-    private dialog: MatDialog
+    private readonly dialog: MatDialog
   ) {}
 
   ngOnInit(): void {
@@ -43,7 +43,7 @@ export class PhotocardsComponent implements OnInit {
       this.data = data['data'];
       this.originalData = { ...this.data };
       this.myPage = data['data'].myPage;
-      this.token = localStorage.getItem('token') || '';
+      this.token = localStorage.getItem('token') ?? '';
     });
   }
 

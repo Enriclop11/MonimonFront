@@ -8,11 +8,11 @@ import { catchError } from 'rxjs/operators';
   providedIn: 'root'
 })
 export class PhotocardsResolverService implements Resolve<any> {
-  constructor(private apiMonitasService: ApiMonitasService) {}
+  constructor(private readonly apiMonitasService: ApiMonitasService) {}
 
   resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<any> {
-    const user = route.paramMap.get('user') || '';
-    const token = localStorage.getItem('token') || '';
+    const user = route.paramMap.get('user') ?? '';
+    const token = localStorage.getItem('token') ?? '';
 
     const userInfo$ = this.apiMonitasService.getUserInfo(user).pipe(
       map(data => {

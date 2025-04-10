@@ -7,12 +7,20 @@ import { ApiMonitasService } from '../../service/api-monitas.service';
   providedIn: 'root'
 })
 export class ProfileResolverService implements Resolve<any> {
-  constructor(private apiMonitasService: ApiMonitasService) {}
+  constructor(private readonly apiMonitasService: ApiMonitasService) {}
 
   resolve(): Observable<any> {
-    const token = localStorage.getItem('token') || '';
+    const token = localStorage.getItem('token') ?? '';
     if (token !== '') {
-      return this.apiMonitasService.getMyUser(token);
+      this.apiMonitasService.getMyUser(token).subscribe({
+        next: (response) => {
+          return response;
+        },
+        error: (error) => {
+          localStorage.removeItem('token');
+          return of(null);
+        }
+      });
     }
     return of(null);
   }
