@@ -21,7 +21,7 @@ export class ProfileComponent implements OnInit {
 
   constructor(
     private readonly apiMonitasService: ApiMonitasService,
-    private dialog: MatDialog,
+    private readonly dialog: MatDialog,
     private readonly route: ActivatedRoute
   ) {}
 
@@ -33,7 +33,7 @@ export class ProfileComponent implements OnInit {
     }
 
     this.route.data.subscribe((data) => {
-      this.userInfo = data['profileData'];
+      this.userInfo = data['userData'];
       if (this.userInfo.photoCardSelected) {
         this.selectedCards = this.userInfo.photoCardSelected;
       }
