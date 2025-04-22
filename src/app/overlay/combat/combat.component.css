@@ -36,7 +36,7 @@ body {
 .card-body {
   position: relative;
   width: 150px;
-  height: 200px;
+  height: 250px;
   backface-visibility: hidden;
   transform-style: preserve-3d;
   transition: transform 0.5s;
