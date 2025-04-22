@@ -15,7 +15,6 @@ export class ToolbarResolverService implements Resolve<any> {
     if (token !== '') {
       return this.apiMonitasService.getMyUser(token).pipe(
         map((response) => {
-          console.log('ToolbarResolverService response:', response);
           return response;
         }),
         catchError((error) => {
