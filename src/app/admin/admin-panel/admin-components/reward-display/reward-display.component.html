@@ -1,0 +1,9 @@
+<div class="reward-display">
+  <h3>{{ reward.name }}</h3>
+  <p><strong>Command: </strong> <input type="text" [(ngModel)]="reward.reward" /></p>
+  <p><strong>Cooldown: </strong> <input type="number" [(ngModel)]="reward.cooldown" /></p>
+  <p><strong>Active: </strong> <input type="checkbox" [(ngModel)]="reward.active" /></p>
+  <p><strong>Mod Only: </strong> <input type="checkbox" [(ngModel)]="reward.modOnly" /></p>
+
+  <button class="btn-save" (click)="save()">Save</button>
+</div>

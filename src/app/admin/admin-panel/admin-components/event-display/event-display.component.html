@@ -1,0 +1,7 @@
+<div class="event-display">
+  <h3>{{ event.name }}</h3>
+  <p><strong>Min Cooldown: </strong> <input type="number" [(ngModel)]="event.minCooldown" /></p>
+  <p><strong>Max Cooldown: </strong> <input type="number" [(ngModel)]="event.maxCooldown" /></p>
+  <p><strong>Active: </strong> <input type="checkbox" [(ngModel)]="event.active" /></p>
+  <button class="btn-save" (click)="save()">Save</button>
+</div>

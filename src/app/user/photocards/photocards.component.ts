@@ -8,6 +8,8 @@ import { ToolbarComponent } from '../../settings/toolbar/toolbar.component';
 import { FormsModule } from '@angular/forms';
 import { ApiMonitasService } from '../../service/api-monitas.service';
 import {MatProgressSpinner} from '@angular/material/progress-spinner';
+import {Photocard} from '../../models/photocard';
+import {User} from '../../models/user';
 
 @Component({
   selector: 'app-photocards',
@@ -30,6 +32,7 @@ export class PhotocardsComponent implements OnInit {
   sortCriteria: string = 'index';
   myPage: boolean = false;
   searchName: any;
+  userData!: User;
 
   constructor(
     private readonly apiMonitasService: ApiMonitasService,
@@ -40,10 +43,13 @@ export class PhotocardsComponent implements OnInit {
 
   ngOnInit(): void {
     this.route.data.subscribe((data) => {
+      console.log(data);
       this.data = data['data'];
       this.originalData = { ...this.data };
+
       this.myPage = data['data'].myPage;
       this.token = localStorage.getItem('token') ?? '';
+      this.userData = data['userData'];
     });
   }
 
@@ -119,8 +125,6 @@ export class PhotocardsComponent implements OnInit {
       }
     });
   }
-
-
 
   selectCard(card: any) {
     this.apiMonitasService.setSelectedCard(this.token, card.id).subscribe({

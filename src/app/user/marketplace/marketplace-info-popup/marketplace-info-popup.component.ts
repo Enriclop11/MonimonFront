@@ -62,9 +62,6 @@ export class MarketplaceInfoPopupComponent {
     }).afterClosed().subscribe({
       next: (result: any) => {
         if (result) {
-
-          console.log('User points:', this.user.score);
-          console.log('Card price:', card.price);
           if (this.user.score < card.price) {
             this.dialog.open(ConfirmDialogComponent, {
               data: {

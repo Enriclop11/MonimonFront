@@ -2,6 +2,9 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { environment} from '../../environments/environment';
+import {Command} from '../models/command';
+import {Reward} from '../models/reward';
+import {EventObject} from '../models/event';
 
 @Injectable({
   providedIn: 'root'
@@ -29,7 +32,6 @@ export class ApiMonitasService {
   }
 
   setPassword(token: string, password: string): Observable<any> {
-    console.log('setting password ' + password + ' ' + token);
     return this.http.post(this.apiUrl + 'changePassword', {password}, {
       headers: {Authorization: 'Bearer ' + token},
       responseType: 'json'
@@ -73,4 +75,39 @@ export class ApiMonitasService {
     return this.http.delete(this.apiUrl + 'marketplace/delete/' + offerId, {headers: {Authorization: 'Bearer ' + token}});
   }
 
+  getCommands(token: string): Observable<any> {
+    return this.http.get(this.apiUrl + 'admin/commands', {headers: {Authorization: 'Bearer ' + token}});
+  }
+
+  getRewards(token: string): Observable<any> {
+    return this.http.get(this.apiUrl + 'admin/rewards', {headers: {Authorization: 'Bearer ' + token}});
+  }
+
+  getEvents(token: string): Observable<any> {
+    return this.http.get(this.apiUrl + 'admin/events', {headers: {Authorization: 'Bearer ' + token}});
+  }
+
+  saveCommand(token: string, command: Command): Observable<any> {
+    return this.http.post(
+      this.apiUrl + 'admin/command/edit',
+      command,
+      {headers: {Authorization: 'Bearer ' + token}, responseType: 'json'}
+    );
+  }
+
+  saveReward(token: string, reward: Reward): Observable<any> {
+    return this.http.post(
+      this.apiUrl + 'admin/reward/edit',
+      reward,
+      {headers: {Authorization: 'Bearer ' + token}, responseType: 'json'}
+    );
+  }
+
+  saveEvent(token: string, event:EventObject): Observable<any> {
+    return this.http.post(
+      this.apiUrl + 'admin/event/edit',
+      event,
+      {headers: {Authorization: 'Bearer ' + token}, responseType: 'json'}
+    );
+  }
 }

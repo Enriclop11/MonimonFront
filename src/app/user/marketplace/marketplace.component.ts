@@ -45,7 +45,6 @@ export class MarketplaceComponent implements OnInit {
 
   getInfo() {
     this.route.data.subscribe((data) => {
-      console.log(data);
       this.originalData = data["data"] || { username: ''};
 
       this.originalData = this.originalData.map((item: any, index: number) => ({

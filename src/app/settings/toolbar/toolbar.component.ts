@@ -14,17 +14,9 @@ import {ApiMonitasService} from '../../service/api-monitas.service';
   standalone: true,
   imports: [
     MatToolbar,
-    MatIcon,
-    MatFormField,
-    MatMenu,
-    MatMenuItem,
-    MatMenuTrigger,
-    MatIconButton,
-    MatInput,
     MatAnchor,
     RouterLink,
     NgOptimizedImage,
-    NgIf
   ],
   templateUrl: './toolbar.component.html',
   styleUrl: './toolbar.component.css'
@@ -33,6 +25,7 @@ export class ToolbarComponent implements OnInit {
 
   username: string = 'LOGIN';
   image: string = '';
+  isModerator: boolean = false;
 
   constructor(
     private readonly router: Router,
@@ -53,6 +46,7 @@ export class ToolbarComponent implements OnInit {
       const userData = data['userData'];
       this.username = userData.username;
       this.image = userData.avatar;
+      this.isModerator = userData.moderator;
     });
   }
 

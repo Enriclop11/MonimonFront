@@ -1,0 +1,91 @@
+.event-display {
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  padding: 16px;
+  margin: 16px 0;
+  background-color: #fff;
+  max-width: 400px;
+}
+
+.event-display h3 {
+  margin: 0 0 12px;
+  font-size: 1.5rem;
+  color: #333;
+}
+
+.event-display p {
+  margin: 8px 0;
+  font-size: 1rem;
+  color: #555;
+}
+
+.event-display p strong {
+  font-weight: bold;
+  color: #333;
+}
+
+.event-display input[type="text"],
+.event-display input[type="number"] {
+  width: calc(100% - 10px);
+  padding: 6px;
+  margin-top: 4px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 1rem;
+}
+
+.event-display input[type="checkbox"] {
+  margin-left: 8px;
+  transform: scale(1.2);
+}
+
+.event-display input:focus {
+  outline: none;
+  border-color: #007bff;
+  box-shadow: 0 0 4px rgba(0, 123, 255, 0.5);
+}
+
+.event-display {
+  flex: 1 1 calc(33.333% - 16px); /* Adjust width for 3 cards per row with spacing */
+  box-sizing: border-box;
+}
+
+@media (max-width: 768px) {
+  .event-display {
+    flex: 1 1 calc(50% - 16px); /* Adjust to 2 cards per row on smaller screens */
+  }
+}
+
+@media (max-width: 480px) {
+  .event-display {
+    flex: 1 1 100%; /* Stack cards on very small screens */
+  }
+}
+
+.btn-save {
+  background-color: var(--purple);
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  padding: 8px 16px;
+  font-size: 1rem;
+  cursor: pointer;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  transition: background-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.btn-save:hover {
+  background-color: var(--dark-purple);
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+}
+
+.btn-save:active {
+  background-color: #004085;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.btn-save:focus {
+  outline: none;
+  box-shadow: 0 0 4px rgba(0, 123, 255, 0.5);
+}

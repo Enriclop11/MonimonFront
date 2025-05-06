@@ -10,6 +10,8 @@ import { LeaderboardResolverService } from './user/leaderboard/leaderboard-resol
 import { PhotocardsResolverService } from './user/photocards/photocards-resolver.service';
 import { MarketplaceResolverService } from './user/marketplace/marketplace-resolver.service';
 import { ToolbarResolverService } from './settings/toolbar/toolbar-resolver.service';
+import {AdminPanelComponent} from './admin/admin-panel/admin-panel.component';
+import {AdminPanelResolverService} from './admin/admin-panel/admin-panel-resolver.service';
 
 export const routes: Routes = [
   { path: '', component: IndexComponent, resolve: { userData: ToolbarResolverService } },
@@ -18,5 +20,6 @@ export const routes: Routes = [
   { path: 'login', component: LoginComponent, resolve: { userData: ToolbarResolverService } },
   { path: 'profile', component: ProfileComponent, resolve: { userData: ToolbarResolverService } },
   { path: 'overlay/combat', component: CombatComponent, resolve: { userData: ToolbarResolverService } },
-  { path: 'marketplace', component: MarketplaceComponent, resolve: { data: MarketplaceResolverService, userData: ToolbarResolverService } }
+  { path: 'marketplace', component: MarketplaceComponent, resolve: { data: MarketplaceResolverService, userData: ToolbarResolverService } },
+  { path: 'admin', component: AdminPanelComponent, resolve: { data: AdminPanelResolverService, userData: ToolbarResolverService} },
 ];

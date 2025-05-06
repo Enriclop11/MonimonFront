@@ -14,9 +14,17 @@
 
   <span class="spacer"></span>
 
-  <a mat-button *ngIf="image" routerLink="/profile" class="user-data">
-    <img class="user-icon" ngSrc="{{image}}" alt="" [width]="30" [height]="30"/>
-  </a>
+  @if (isModerator) {
+    <a mat-button routerLink="/admin">
+      <img class="icon" src="assets/admin_button.png" alt="Admin" [width]="30" [height]="30"/>
+    </a>
+  }
+
+  @if (image) {
+    <a mat-button routerLink="/profile" class="user-data">
+      <img class="user-icon" [src]="image" alt="" [width]="30" [height]="30"/>
+    </a>
+  }
 
   <a mat-button routerLink="/profile" class="user-data">
     {{username}}
