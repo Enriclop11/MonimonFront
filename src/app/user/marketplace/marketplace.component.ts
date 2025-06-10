@@ -110,10 +110,10 @@ export class MarketplaceComponent implements OnInit {
 
     if (this.searchName === '') {
       // If the searchName is empty, reset to originalData
-      this.data.photoCards = [...this.originalData.photoCards];
+      this.data = [...this.originalData];
     } else {
       // Filter the photoCards array by containing the searchName in either name or band
-      this.data.photoCards = this.originalData.photoCards.filter((item: any) => {
+      this.data = this.originalData.filter((item: any) => {
         return item.name.toLowerCase().includes(this.searchName) || item.band.toLowerCase().includes(this.searchName);
       });
     }
