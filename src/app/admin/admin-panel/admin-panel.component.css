@@ -19,6 +19,13 @@
   justify-content: center;
 }
 
+.events {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  justify-content: center;
+}
+
 h2 {
   background-color: var(--purple);
   color: white;
