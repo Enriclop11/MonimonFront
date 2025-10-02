@@ -14,6 +14,14 @@
     <a class="btn" (click)="toggleChangePassword()">Cambiar Contraseña</a>
   </div>
 
+  <div class="link-discord">
+    @if (userInfo.dcUsername) {
+      <a class="btn" (click)="unlinkDiscord()">Desvincular Discord</a>
+    } @else {
+      <a class="btn" (click)="linkDiscord()">Vincular Discord</a>
+    }
+  </div>
+
   <div class="logout">
     <a class="btn" (click)="logout()">Log Out</a>
   </div>

@@ -39,10 +39,12 @@ export class AdminPanelComponent implements OnInit {
   commands: Command[] = [];
   rewards: Reward[] = [];
   events: EventObject[] = [];
+  discordCommands: Command[] = [];
 
   showCommands: boolean = false;
   showRewards: boolean = false;
   showEvents: boolean = false;
+  showDiscordCommands: boolean = false;
 
   constructor(
     private readonly apiMonitasService: ApiMonitasService,
@@ -63,6 +65,7 @@ export class AdminPanelComponent implements OnInit {
         this.commands = data['data'].commands || [];
         this.rewards = data['data'].rewards || [];
         this.events = data['data'].events || [];
+        this.discordCommands = data['data'].discordCommands || [];
         this.user = data['userData'] || null;
 
         if (!this.user) {
@@ -105,6 +108,16 @@ export class AdminPanelComponent implements OnInit {
         this.events = response;
       } else {
         console.error('Error saving event');
+      }
+    });
+  }
+
+  saveDiscordCommand(command: Command): void {
+    this.apiMonitasService.saveDiscordCommand(this.token, command).subscribe((response: any) => {
+      if (response) {
+        this.discordCommands = response;
+      } else {
+        console.error('Error saving Discord command');
       }
     });
   }

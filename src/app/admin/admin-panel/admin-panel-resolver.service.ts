@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Resolve } from '@angular/router';
-import { Observable } from 'rxjs';
 import { ApiMonitasService } from '../../service/api-monitas.service';
+import {forkJoin, Observable, of} from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -12,25 +12,14 @@ export class AdminPanelResolverService implements Resolve<any> {
   resolve(): Observable<any> {
     const token = localStorage.getItem('token') ?? '';
     if (token === '') {
-      return new Observable((observer) => {
-        observer.next(null);
-        observer.complete();
-      });
+      return of(null);
     }
 
-    let commands = this.apiMonitasService.getCommands(token);
-    let rewards = this.apiMonitasService.getRewards(token);
-    let events = this.apiMonitasService.getEvents(token);
-
-    return new Observable((observer) => {
-      commands.subscribe((commandsData) => {
-        rewards.subscribe((rewardsData) => {
-          events.subscribe((eventsData) => {
-            observer.next({ commands: commandsData, rewards: rewardsData, events: eventsData });
-            observer.complete();
-          });
-        });
-      });
+    return forkJoin({
+      commands: this.apiMonitasService.getCommands(token),
+      rewards: this.apiMonitasService.getRewards(token),
+      events: this.apiMonitasService.getEvents(token),
+      discordCommands: this.apiMonitasService.getDiscordCommands(token)
     });
   }
 }

@@ -13,7 +13,8 @@ export class ApiMonitasService {
 
   private readonly apiUrl = environment.apiUrl;
 
-  constructor(private readonly http: HttpClient) {}
+  constructor(private readonly http: HttpClient) {
+  }
 
   getUserInfo(user: string): Observable<any> {
     return this.http.get(this.apiUrl + 'users/' + user);
@@ -48,6 +49,17 @@ export class ApiMonitasService {
 
   sendLoginTwitch(code: string): Observable<any> {
     return this.http.post(this.apiUrl + 'loginTwitch', {code}, {responseType: 'json'});
+  }
+
+  linkDiscord(token: string, discordCode: string, redirectUri: string): Observable<any> {
+    return this.http.post(this.apiUrl + 'linkDiscord', {
+      discordCode,
+      redirectUri
+    }, {headers: {Authorization: 'Bearer ' + token}, responseType: 'json'});
+  }
+
+  unlinkDiscord(token: string): Observable<any> {
+    return this.http.get(this.apiUrl + 'unlinkDiscord', {headers: {Authorization: 'Bearer ' + token}});
   }
 
   getCardPrice(cardId: number): Observable<any> {
@@ -87,6 +99,10 @@ export class ApiMonitasService {
     return this.http.get(this.apiUrl + 'admin/events', {headers: {Authorization: 'Bearer ' + token}});
   }
 
+  getDiscordCommands(token: string): Observable<any> {
+    return this.http.get(this.apiUrl + 'admin/discordCommands', {headers: {Authorization: 'Bearer ' + token}});
+  }
+
   saveCommand(token: string, command: Command): Observable<any> {
     return this.http.post(
       this.apiUrl + 'admin/command/edit',
@@ -103,10 +119,18 @@ export class ApiMonitasService {
     );
   }
 
-  saveEvent(token: string, event:EventObject): Observable<any> {
+  saveEvent(token: string, event: EventObject): Observable<any> {
     return this.http.post(
       this.apiUrl + 'admin/event/edit',
       event,
+      {headers: {Authorization: 'Bearer ' + token}, responseType: 'json'}
+    );
+  }
+
+  saveDiscordCommand(token: string, command: Command): Observable<any> {
+    return this.http.post(
+      this.apiUrl + 'admin/discordCommand/edit',
+      command,
       {headers: {Authorization: 'Bearer ' + token}, responseType: 'json'}
     );
   }

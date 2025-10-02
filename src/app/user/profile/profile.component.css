@@ -3,7 +3,7 @@
   justify-content: space-between;
 }
 
-.my-cards, .change-password, .logout {
+.my-cards, .change-password, .logout, .link-discord {
   flex: 1;
   display: flex;
   justify-content: center;

@@ -31,5 +31,14 @@
     }
   </div>
 
+  <h2 (click)="showDiscordCommands = !showDiscordCommands" style="cursor: pointer;">
+    Discord Commands
+  </h2>
+  <div class="commands" [@slideToggle]="showDiscordCommands ? 'visible' : 'hidden'">
+    @for (command of discordCommands; track command.name) {
+      <app-command-display [command]="command" (saveCommand)="saveDiscordCommand($event)" ></app-command-display>
+    }
+  </div>
+
 </div>
 
